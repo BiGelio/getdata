@@ -2,28 +2,22 @@
 <html>
 <head>
 <title>Login form</title>
+<link rel = "stylesheet" type = "text/css" 
+   href = "<?php echo base_url(); ?>css/login.css">
+
+<script type = 'text/javascript' src = "<?php echo base_url(); 
+   ?>js/login.js"></script>
 </head>
 
 <body>
-	<form method="post">
-<table width="600" align="center" border="1" cellspacing="5" cellpadding="5">
- <tr>
-		<td colspan="2"><?php echo @$error; ?></td>
-	</tr>
-  <tr>
-    <td>Enter Your Email </td>
-    <td><input type="text" name="email"/></td>
- </tr>
-
- <tr>
-    <td width="230">Enter Your Password </td>
-    <td width="329"><input type="password" name="pass"/></td>
-  </tr> 
-   <tr>
-    <td colspan="2" align="center">
-	<input type="submit" name="login" value="Login"/></td>
-  </tr>
-</table>
+  <div class="main">
+    <form method="post">
+    
+<div class=""><p><?php echo @$error; ?></p></div>
+<div class=""><p>Enter Your Email </p><input type="text" name="email"/></div>
+<div class=""><p>Enter Your Password </p><input type="password" name="pass"/></div>
+<div class=""><input type="submit" name="login" value="Login"/></div>
+</div>
 
 	</form>
 </body>

@@ -8,8 +8,9 @@ class MembersController extends CI_Controller
 	
 	//load Model
 	$this->load->model('MembersModel');
-
-	$this->load->helper('url');
+    $this->load->helper('url', 'form');	
+	$this->load->library('form_validation');
+	
 	}
 
 	public function savedata()
@@ -38,11 +39,33 @@ class MembersController extends CI_Controller
 		}
 		else
 		{
+
+			// image uploads section
+	    $config['upload_path'] = './upload/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = 2000;
+        $config['max_width'] = 1500;
+        $config['max_height'] = 1500;
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('profile_pic')) 
+		{
+            $error = array('error' => $this->upload->display_errors());
+
+            $this->load->view('addMember', $error);
+        } 
+		else 
+		{
+            $data = array('image_metadata' => $this->upload->data());
+
+            $this->load->view('addMember', $data);
+        }
 		$this->MembersModel->saverecords($name,$id,$phone,$sex,$date_of_birth,$job,$address);
 		
 		$data['error']="<h3 style='color:blue'>Your account created successfully</h3>";
 		}			
-		// $this->load->view('addMember',@$data);		
+		$this->load->view('addMember',@$data);		
 		}
 	
 	}	
